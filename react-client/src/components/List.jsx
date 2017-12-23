@@ -16,8 +16,9 @@ const List = (props) => (
   <div>
     <h4> Where are you </h4>
     There are {props.restros.length } items.
-    {console.log(props.restro)}
-    {props.restros.map((restro, idx)=>{return <ListItem restro={restro} key={idx} func={props.func}/>})}
+    {/*{console.log(props.restro)}*/}
+    {/*{console.log(props.clickRestro)}*/}
+    {props.restros.map((restro, idx)=>{return <ListItem restro={restro} idx={idx} key={idx} clickRestro={props.clickRestro}/>})}
     {/*<ListItem/>*/}
   </div>
 )

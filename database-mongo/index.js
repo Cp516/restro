@@ -25,22 +25,34 @@ db.once('open', function() {
 
 var restroSchema = mongoose.Schema({
   user: String,
-  visited: Boolean,
-  wishList: Boolean,
-  favs: Boolean,
-  comments: String
+  // visited: Boolean,
+  wishList: Boolean
+  // favs: Boolean,
+  // comments: String
 });
 
 var Restro = mongoose.model('Restro', restroSchema);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, items);
+var save = (restroSchema)=>{
+    Restro.create(restroSchema, function(err, data){
+    if(err){
+      console.log(err)
+    }else{
+      console.log('Sucess!!!')
     }
-  });
-};
+  })
+}
 
-module.exports.selectAll = selectAll;
+
+// var selectAll = function(callback) {
+//   Item.find({}, function(err, items) {
+//     if(err) {
+//       callback(err, null);
+//     } else {
+//       callback(null, items);
+//     }
+//   });
+// };
+
+// module.exports.selectAll = selectAll;
+module.exports.save = save;

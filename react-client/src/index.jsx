@@ -19,10 +19,19 @@ class App extends React.Component {
       visited: [],
       wishList: []
 
-    },
-    this.func = ()=>{
-      this.
     }
+    this.clickRestro = this.clickRestro.bind(this);
+  }
+  clickRestro (restro){
+    console.log('===$@%#$@#%@#$%=====>',restro)
+    $.ajax({
+      method: 'post',
+      url: '/wish',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        restro: restro
+      })
+    })
   }
 
 componentDidMount(){
@@ -42,6 +51,8 @@ componentDidMount(){
       console.log('back in the client')
       this.setState({restros: data.businesses});
     });
+
+
   });
 }
 
@@ -77,7 +88,7 @@ componentDidMount(){
       </form> 
 
 
-      <List restros={this.state.restros}/>
+      <List restros={this.state.restros} clickRestro={this.clickRestro}/>
     </div>)
   }
 }

@@ -13,7 +13,7 @@ let call = (data, cb) => {
   // but you'll have to fill in the URL
   
   let options = {
-    url: 'https://api.yelp.com/v3/businesses/search?location=' + data.location + data.category + '&radius=' + data.radius,
+    url: 'https://api.yelp.com/v3/businesses/search?location=' + data.location + data.category + '&limit=10' +'&radius=' + data.radius,
     headers: {
       'User-Agent': 'request',
       'Authorization': `Bearer ${config.TOKEN}`

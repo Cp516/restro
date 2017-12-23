@@ -8,11 +8,17 @@
 import React from 'react';
 
 const ListItem = (props) => (
-  <div>
-    <img src={props.restro.image_url} onClick={} alt="Smiley face" height="150" width="150"/>
+  <div onClick={()=> props.clickRestro(props.restro)}>
     <div>
-      <span> {props.restro.}</span>
+      <img src={props.restro.image_url} alt="Smiley face" height="150" width="150"/>
     </div>
+  {/*{console.log(props.restro)}*/}
+    <p>{props.restro.name}</p>
+    <p>{props.restro.phone}</p>
+    <p>{props.restro.location.address1}</p>
+    <p>{props.restro.location.city}</p>
+    <p>{props.restro.location.state}</p>
+    <p>{props.restro.location.zip_code}</p>
   </div>
 )
 
