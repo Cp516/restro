@@ -21,20 +21,25 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-
+                          // ============================
+                          // /Wish
+                          // ============================
 app.post('/wish', function(req, res){
   console.log(req.body)
   controller.save(
     {
-      name: req.body.name,
-      user: req.body.restro.name,
+      name: req.body.restro.name,
+      user: req.body.name,
       wishList: true,
       address: req.body.restro.location.address1 + ', ' + req.body.restro.location.city + ' ' + req.body.restro.location.state,
-      number: req.body.restro.phone
+      number: req.body.restro.phone,
+      uniq: req.body.name + req.body.restro.name
   })
   res.send()
 })
-
+                          // ============================
+                          // /BEEN
+                          // ============================
 app.post('/been', function(req, res){
   console.log(req.body)
   controller.save(
@@ -47,7 +52,9 @@ app.post('/been', function(req, res){
   })
   res.send()
 })
-
+                          // ============================
+                          // QUERY
+                          // ============================
 app.post('/search', function (req, res) {
   // items.save({user: "hello"})
   var miles = req.body.miles * 1609;
@@ -60,6 +67,15 @@ app.post('/search', function (req, res) {
     console.log('inside serve callback')
     res.send(body)})
 });
+
+                          // ============================
+                          // LANDING
+                          // ============================
+
+app.post('/', function(req, res){
+  console.log('In Query')
+  controller.getDb(()=>{console.log(results)})
+})
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

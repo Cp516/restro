@@ -25,10 +25,11 @@ db.once('open', function() {
 
 var restroSchema = mongoose.Schema({
   name: String,
+  user: String,
   number: Number,
   wishList: Boolean,
   address: String,
-  phone: {type: String, unique: true}
+  uniq: {type: String, unique: true}
 });
 
 var Restro = mongoose.model('Restro', restroSchema);
@@ -36,12 +37,21 @@ var Restro = mongoose.model('Restro', restroSchema);
 var save = (restroSchema)=>{
     Restro.create(restroSchema, function(err, data){
     if(err){
-      console.log('Already Exists')
+      console.log(err)
     }else{
-      console.log('Sucess!!!')
+      console.log('Success!!!')
+      console.log(data.uniq)
     }
   })
 }
+var getDb = (cb) => {
+  Restro.find({name: 'one'}, (err, results)=>{
+  if(results.length > 0){
+    console.log('get')
+    cb(results);
+  }else{
+    return console.log(err)}
+  })}
 
 // var been = 
 // var selectAll = function(callback) {
@@ -56,3 +66,4 @@ var save = (restroSchema)=>{
 
 // module.exports.selectAll = selectAll;
 module.exports.save = save;
+module.exports.getDb = getDb;
