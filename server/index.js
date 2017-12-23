@@ -29,10 +29,11 @@ app.post('/wish', function(req, res){
   controller.save(
     {
       name: req.body.restro.name,
+      image_url: req.body.restro.image_url,
       user: req.body.name,
       wishList: true,
-      address: req.body.restro.location.address1 + ', ' + req.body.restro.location.city + ' ' + req.body.restro.location.state,
-      number: req.body.restro.phone,
+      location: req.body.restro.location,
+      phone: req.body.restro.phone,
       uniq: req.body.name + req.body.restro.name,
   })
   res.send()

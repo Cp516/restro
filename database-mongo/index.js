@@ -26,9 +26,10 @@ db.once('open', function() {
 var restroSchema = mongoose.Schema({
   name: String,
   user: String,
-  number: Number,
+  phone: Number,
+  image_url: String,
   wishList: Boolean,
-  address: String,
+  location: Object,
   uniq: {type: String, unique: true}
 });
 

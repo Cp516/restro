@@ -10,7 +10,7 @@ import React from 'react';
 const ListItem = (props) => (
   <div   style={{ padding:15, margin: 15, border: '1px solid red'}}>
     
-    <img src={props.restro.image_url} alt="Smiley face" height="170" width="170"/>
+    <img src={props.restro.image_url} alt="Restro" height="170" width="170"/>
     <figcaption>
       {props.restro.name}
       <br/> {props.restro.phone}<br/>

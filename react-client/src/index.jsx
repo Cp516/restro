@@ -66,7 +66,7 @@ class App extends React.Component {
         data:{
           name: this.state.name
         }
-      }).done((data)=>{console.log(data)});
+      }).done((data)=>{this.setState({restros: data},()=>{console.log(this.state.restros)})});
     })
     
   };
