@@ -10,13 +10,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import Users from './components/Users.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       restros: [],
-      user: ''
+      name: '',
+      users: {}
     }
     this.clickRestro = this.clickRestro.bind(this);
   }
@@ -51,7 +53,17 @@ componentDidMount(){
   $.ajax({
     method: 'post',
       url: '/'
-  })
+  }).done((data)=>{
+      data.forEach((element) =>{
+        if(this.state.users[element.user]){
+
+        }else{
+          this.state.users[element.user] = true
+        }
+        console.log(this.state.users)
+      });
+      this.setState({users: this.state.users})
+    })
 
   $('#chrisForm').on('submit', (e)=>{
     e.preventDefault();
@@ -104,10 +116,12 @@ componentDidMount(){
           <option value="Spanish">Spanish</option>
         </select>
 
+
         <br/><br/>
         <input type="submit" value="Submit"/>
       </form> 
 
+      <Users list={this.state.users}/>
 
       <List restros={this.state.restros} clickRestro={this.clickRestro}/>
     </div>)

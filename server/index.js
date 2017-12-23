@@ -33,7 +33,7 @@ app.post('/wish', function(req, res){
       wishList: true,
       address: req.body.restro.location.address1 + ', ' + req.body.restro.location.city + ' ' + req.body.restro.location.state,
       number: req.body.restro.phone,
-      uniq: req.body.name + req.body.restro.name
+      uniq: req.body.name + req.body.restro.name,
   })
   res.send()
 })
@@ -74,7 +74,7 @@ app.post('/search', function (req, res) {
 
 app.post('/', function(req, res){
   console.log('In Query')
-  controller.getDb(()=>{console.log(results)})
+  controller.getUsers((results)=>{res.send(results)})
 })
 
 app.listen(3000, function() {

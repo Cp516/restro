@@ -40,16 +40,16 @@ var save = (restroSchema)=>{
       console.log(err)
     }else{
       console.log('Success!!!')
-      console.log(data.uniq)
     }
   })
 }
-var getDb = (cb) => {
-  Restro.find({name: 'one'}, (err, results)=>{
+var getUsers = (cb) => {
+  Restro.find({}, 'user', (err, results)=>{
   if(results.length > 0){
     console.log('get')
     cb(results);
   }else{
+    console.log('in getDB')
     return console.log(err)}
   })}
 
@@ -66,4 +66,4 @@ var getDb = (cb) => {
 
 // module.exports.selectAll = selectAll;
 module.exports.save = save;
-module.exports.getDb = getDb;
+module.exports.getUsers = getUsers;
