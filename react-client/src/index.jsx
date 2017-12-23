@@ -16,20 +16,20 @@ class App extends React.Component {
     super(props);
     this.state = { 
       restros: [],
-      visited: [],
-      wishList: []
-
+      user: ''
     }
     this.clickRestro = this.clickRestro.bind(this);
   }
+
   clickRestro (restro){
-    console.log('===$@%#$@#%@#$%=====>',restro)
+    // console.log('===$@%#$@#%@#$%=====>',restro)
     $.ajax({
       method: 'post',
       url: '/wish',
       contentType: 'application/json',
       data: JSON.stringify({
-        restro: restro
+        restro: restro,
+        name: this.state.name
       })
     })
   }
@@ -44,12 +44,15 @@ componentDidMount(){
       data: JSON.stringify({
         name: $('input[name=firstname]').val(),
         location: $('input[name=location]').val(),
-        miles: $('#distance option:selected').text(),
+        miles: $('#distance option:selected').val(),
         category: $('#cate option:selected').text()
       })
     }).done((data) => {
       console.log('back in the client')
+      // console.log(data)
       this.setState({restros: data.businesses});
+      this.setState({name: $('input[name=firstname]').val()})
+      console.log(this.state)
     });
 
 
@@ -62,14 +65,14 @@ componentDidMount(){
 
       <form id="chrisForm" action="/" method="POST">
         Name:<br/>
-        <input type="text" name="firstname" />
+        <input type="text" name="firstname" required/>
         <br/>
         Location:<br/>
-        <input type="text" name="location" />
+        <input type="text" name="location" required/>
 
         <select id="distance">
-          <option value="5">5</option>
-          <option value="10">10</option>
+          <option value="5">5 mi</option>
+          <option value="10">10 mi</option>
           <option value="15">15</option>
           <option value="20">20</option>
         </select>

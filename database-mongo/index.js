@@ -24,11 +24,11 @@ db.once('open', function() {
 });
 
 var restroSchema = mongoose.Schema({
-  user: String,
-  // visited: Boolean,
-  wishList: Boolean
-  // favs: Boolean,
-  // comments: String
+  name: String,
+  number: Number,
+  wishList: Boolean,
+  address: String,
+  phone: {type: String, unique: true}
 });
 
 var Restro = mongoose.model('Restro', restroSchema);
@@ -36,7 +36,7 @@ var Restro = mongoose.model('Restro', restroSchema);
 var save = (restroSchema)=>{
     Restro.create(restroSchema, function(err, data){
     if(err){
-      console.log(err)
+      console.log('Already Exists')
     }else{
       console.log('Sucess!!!')
     }
