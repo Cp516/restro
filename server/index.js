@@ -35,6 +35,19 @@ app.post('/wish', function(req, res){
   res.send()
 })
 
+app.post('/been', function(req, res){
+  console.log(req.body)
+  controller.save(
+    {
+      name: req.body.name,
+      user: req.body.restro.name,
+      wishList: true,
+      address: req.body.restro.location.address1 + ', ' + req.body.restro.location.city + ' ' + req.body.restro.location.state,
+      number: req.body.restro.phone
+  })
+  res.send()
+})
+
 app.post('/search', function (req, res) {
   // items.save({user: "hello"})
   var miles = req.body.miles * 1609;

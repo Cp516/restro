@@ -33,6 +33,18 @@ class App extends React.Component {
       })
     })
   }
+  clickRestro (restro){
+    // console.log('===$@%#$@#%@#$%=====>',restro)
+    $.ajax({
+      method: 'post',
+      url: '/been',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        restro: restro,
+        name: this.state.name
+      })
+    })
+  }
 
 componentDidMount(){
   $('#chrisForm').on('submit', (e)=>{

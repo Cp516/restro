@@ -18,6 +18,7 @@ const ListItem = (props) => (
       {props.restro.location.city}, {props.restro.location.state}, {props.restro.location.zip_code}<br/>
     </figcaption>
   <button onClick={()=> props.clickRestro(props.restro)}>Must Go!</button>
+  {/*<button onClick={()=> props.clickRestro(props.restro)}>Already Been!</button>*/}
     
   </div>
 )
