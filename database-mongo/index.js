@@ -43,8 +43,12 @@ var save = (restroSchema)=>{
     }
   })
 }
+
+//==================================
+//      GET ALL
+//===================================
 var getUsers = (cb) => {
-  Restro.find({}, 'user', (err, results)=>{
+  Restro.find({}, (err, results)=>{
   if(results.length > 0){
     console.log('get')
     cb(results);
@@ -52,6 +56,22 @@ var getUsers = (cb) => {
     console.log('in getDB')
     return console.log(err)}
   })}
+
+
+//==================================
+//      GET SPECIFIC USER DATA
+//===================================
+var getUserData = (name, cb)=>{
+  Restro.find({'user': name}, (err, results)=>{
+
+  if(results){
+    console.log('in getDB')
+    console.log('get')
+    cb(results);
+  }else{
+    console.log('err')}
+  })
+}
 
 // var been = 
 // var selectAll = function(callback) {
@@ -67,3 +87,4 @@ var getUsers = (cb) => {
 // module.exports.selectAll = selectAll;
 module.exports.save = save;
 module.exports.getUsers = getUsers;
+module.exports.getUserData = getUserData;

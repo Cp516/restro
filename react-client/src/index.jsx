@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import Users from './components/Users.jsx';
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends React.Component {
       users: {}
     }
     this.clickRestro = this.clickRestro.bind(this);
+    this.userChange = this.userChange.bind(this);
   }
 
   clickRestro (restro){
@@ -34,30 +36,53 @@ class App extends React.Component {
         name: this.state.name
       })
     })
+  };
+  userlist(){
+    $.ajax({
+    method: 'post',
+      url: '/'
+    }).done((data)=>{
+      data.forEach((element)=> {
+        if(!this.state.users[element.user]){
+          this.state.users[element.user] = true
+          console.log(this.state.users)
+          // var selected = $('#test option:selected').val()
+          // console.log('selected:', selected)
+        }
+      });
+      this.setState({users: this.state.users})
+    })
   }
-  // clickRestro (restro){
-  //   // console.log('===$@%#$@#%@#$%=====>',restro)
-  //   $.ajax({
-  //     method: 'post',
-  //     url: '/been',
-  //     contentType: 'application/json',
-  //     data: JSON.stringify({
-  //       restro: restro,
-  //       name: this.state.name
-  //     }
-  //     )
-  //   })
-  // }
+
+  userChange (e) {
+    // console.log(e.target.value)
+    var val = e.target.value
+    console.log(val);
+    this.setState({name: val},()=>{
+      $.ajax({
+        method: 'get',
+        url: '/user',
+        contentType: 'application/json',
+        data:{
+          name: this.state.name
+        }
+      }).done((data)=>{console.log(data)});
+    })
+    
+  };
+
 
 componentDidMount(){
   $.ajax({
     method: 'post',
       url: '/'
   }).done((data)=>{
-      data.forEach((element) =>{
+      data.forEach((element)=> {
         if(!this.state.users[element.user]){
           this.state.users[element.user] = true
           console.log(this.state.users)
+          // var selected = $('#test option:selected').val()
+          // console.log('selected:', selected)
         }
       });
       this.setState({users: this.state.users})
@@ -84,12 +109,14 @@ componentDidMount(){
     });
 
   });
+console.log(this.state.name)
 }
 
   render () {
     return (<div>
       <h1>Restro</h1>
-      <Users list={this.state.users}/>
+
+      <Users list={this.state.users} userChange={this.userChange}/>
 
       <form id="chrisForm" action="/" method="POST">
         Name:<br/>
@@ -127,8 +154,8 @@ componentDidMount(){
 }
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
 
+ReactDOM.render(<App />, document.getElementById('app'));
 // $("#chrisForm").submit(function(e) {
 //     e.preventDefault();
 // });
@@ -136,7 +163,19 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 
 
-
+// axios.post('/search', {
+    //     name: $('input[name=firstname]').val(),
+    //     location: $('input[name=location]').val(),
+    //     miles: $('#distance option:selected').val(),
+    //     category: $('#cate option:selected').text()
+    //   }
+    //   ).then((data) => {
+    //   console.log('back in the client')
+    //   console.log(data)
+    //   this.setState({restros: data.businesses});
+    //   this.setState({name: $('input[name=firstname]').val()})
+    //   console.log(this.state)
+    // })
 
 
   // componentDidMount() {

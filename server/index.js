@@ -57,6 +57,7 @@ app.post('/been', function(req, res){
                           // ============================
 app.post('/search', function (req, res) {
   // items.save({user: "hello"})
+  console.log(req.body)
   var miles = req.body.miles * 1609;
   var data = {
     location:  req.body.location,
@@ -75,6 +76,15 @@ app.post('/search', function (req, res) {
 app.post('/', function(req, res){
   console.log('In Query')
   controller.getUsers((results)=>{res.send(results)})
+})
+                       // ============================
+                      // USERS
+                      // ============================
+app.get('/user', function(req, res){
+  console.log('====%^&$%^&>',req.query.name)
+  controller.getUserData(req.query.name, (data)=>{res.send(data)})
+  
+  // controller.userData()
 })
 
 app.listen(3000, function() {
