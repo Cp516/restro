@@ -55,12 +55,10 @@ componentDidMount(){
       url: '/'
   }).done((data)=>{
       data.forEach((element) =>{
-        if(this.state.users[element.user]){
-
-        }else{
+        if(!this.state.users[element.user]){
           this.state.users[element.user] = true
+          console.log(this.state.users)
         }
-        console.log(this.state.users)
       });
       this.setState({users: this.state.users})
     })
@@ -85,13 +83,13 @@ componentDidMount(){
       console.log(this.state)
     });
 
-
   });
 }
 
   render () {
     return (<div>
       <h1>Restro</h1>
+      <Users list={this.state.users}/>
 
       <form id="chrisForm" action="/" method="POST">
         Name:<br/>
@@ -121,7 +119,7 @@ componentDidMount(){
         <input type="submit" value="Submit"/>
       </form> 
 
-      <Users list={this.state.users}/>
+      
 
       <List restros={this.state.restros} clickRestro={this.clickRestro}/>
     </div>)
